@@ -3,94 +3,109 @@
 #include<string.h>
 #define Len 200
 char r[2*Len-1];
-//´óÕûÊý³Ë·¨£ºÊäÈëÁ½¸öÊý×Ö´®£¬·µ»ØÒ»¸ö½á¹û´®£¨È¥³ýÇ°µ¼0µÄ£©
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½Ç°ï¿½ï¿½0ï¿½Ä£ï¿½
 void lnmp(char *cs,char *bcs)
 {
-char cjr[Len][Len][2];
-int i,j,k,l,cslen,bcslen,rlen,jw=0,temp,out=0;
-cslen=strlen(cs);
-bcslen=strlen(bcs);
-rlen=cslen+bcslen-1;
-//Éú³É¾ØÐÎ±í£¨ÈýÎ¬Êý×é£©
-for(i=cslen-1;i>=0;i--)
-for(j=bcslen-1;j>=0;j--)
-{
-	temp=(cs[i]-'0')*(bcs[j]-'0');
-       cjr[j][i][0]=temp/10;
-       cjr[j][i][1]=temp%10;
-}
-//Çó³ö½á¹û£¨×¢ÒâÒ»¸ö¹æÂÉÐÔµÄ¶«Î÷£¬´Ó×îºóÒ»Î»µ½×îÇ°Ò»Î»£¬Îª¾ØÐÎ±íÀïÍ·µÄÏÂ±êµÝ¼õµÄÊý×ÖÖ®ºÍ£©
-for(l=rlen;l>=0;l--)
-{
-       temp=jw;
-       for(i=cslen-1;i>=0;i--)
-       for(j=bcslen-1;j>=0;j--)
-       for(k=1;k>=0;k--)
-       if(l==i+j+k) temp=temp+cjr[j][i][k];
-       jw=temp/10;
-       r[l]=temp%10+'0';
-}
-for(l=0;l<rlen;l++) if(r[l]!='0') break;
-if(l) for(i=l;i<=rlen+1;i++) r[i-l]=r[i];
+	char cjr[Len][Len][2];
+	int i,j,k,l,cslen,bcslen,rlen,jw=0,temp,out=0;
+	cslen=strlen(cs);
+	bcslen=strlen(bcs);
+	rlen=cslen+bcslen-1;
+	//ï¿½ï¿½ï¿½É¾ï¿½ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½é£©
+	for(i=cslen-1;i>=0;i--)
+	for(j=bcslen-1;j>=0;j--)
+	{
+	      temp=(cs[i]-'0')*(bcs[j]-'0');
+	       cjr[j][i][0]=temp/10;
+	       cjr[j][i][1]=temp%10;
+	}
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÔµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Î»ï¿½ï¿½ï¿½ï¿½Ç°Ò»Î»ï¿½ï¿½Îªï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½Â±ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½Í£ï¿½
+	for(l=rlen;l>=0;l--)
+	{
+	       temp=jw;
+	       for(i=cslen-1;i>=0;i--)
+	       for(j=bcslen-1;j>=0;j--)
+	       for(k=1;k>=0;k--)
+	       if(l==i+j+k) 
+	           temp=temp+cjr[j][i][k];
+	       jw=temp/10;
+	       r[l]=temp%10+'0';
+	}
+	for(l=0;l<rlen;l++) 
+	      if(r[l]!='0') break;
+	if(l) 
+		for(i=l;i<=rlen+1;i++)
+			r[i-l]=r[i];
 }
 int main()
 {
-char R[Len];
-int N;
-int i,j,k,xsdws,temp,flag;
-while(scanf("%s %d",R,&N)!=EOF)
-{
-i=1,flag=0;
-temp=strlen(r);
-for(i=0;i<temp;i++) r[i]='\0';
-
-//ÇóÐ¡ÊýµãµÄÎ»ÖÃ
-temp=strlen(R);
-for(i=0;i<temp;i++)
-if(R[i]=='.') break;
-//Èç¹ûÊÇÐ¡Êý£¬ÏÈ×ª»»³ÉÕûÊý£¬ºóÃæÔÙ×ª»»»ØÀ´
-if(i!=temp)
-{
-       flag=1;
-       xsdws=(temp-i-1)*N; 
-       for(j=i;j<=temp;j++)
-       R[j]=R[j+1];
-}
-//È¥³ýÇ°µ¼Áã£¬¼õÉÙ²»±ØÒªµÄ¼ÆËã´ÎÊý
-for(i=0;i<temp;i++) if(R[i]!='0') break;
-if(i) for(j=i;j<=temp;j++) R[j-i]=R[j];
-strcpy(r,R);
-for(i=1;i<N;i++)
-lnmp(r,R);
-temp=strlen(r);
-//Èç¹ûÊÇÕûÊý£¬Ö±½ÓÊä³ö½á¹û£¬·ñÔòÒª¿¼ÂÇ¼¸ÖÖÇé¿ö
-if(!flag)
-{
-       for(j=0;j<temp;j++)
-       putchar(r[j]);
-}
-//ÎªÐ¡ÊýÊ±£¬ÐèÒª¿¼ÂÇÈ¥µôÄ©Î²ÎÞÐ§µÄÁã£¬Èç¹ûÎ»Êý²»¹»£¬ÐèÒª²¹³äÁã£¬ÏÂÃæ½«³öÊ¾±È½ÏµäÐÍµÄÀý×Ó
-else
-{       
-       i=temp-xsdws;
-       if(temp>xsdws)
-       {
-              i=temp-xsdws;
-              for(j=0;j<i;j++)       putchar(r[j]);
-              for(k=temp-1;k>=0;k--)       if(r[k]!='0') break;
-              if(i<=k) putchar('.');
-              for(j=i;j<k+1;j++)       putchar(r[j]);
-       }
-       else
-       {
-              i=xsdws-temp;
-              putchar('.');
-              for(j=0;j<i;j++)       putchar('0');
-              for(k=temp-1;k>=0;k--)       if(r[k]!='0') break;
-              for(j=0;j<k+1;j++)       putchar(r[j]);       
-       }
-}
-putchar('\n');
-}
-return 0;
+	char R[Len];
+	int N;
+	int i,j,k,xsdws,temp,flag;
+	while(scanf("%s %d",R,&N)!=EOF)
+	{
+		i=1,flag=0;
+		temp=strlen(r);
+		for(i=0;i<temp;i++) 
+			r[i]='\0';
+		
+		//ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+		temp=strlen(R);
+		for(i=0;i<temp;i++)
+			if(R[i]=='.') break;
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if(i!=temp)
+		{
+		       flag=1;
+		       xsdws=(temp-i-1)*N; 
+		       for(j=i;j<=temp;j++)
+			  R[j]=R[j+1];
+		}
+		//È¥ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½Ù²ï¿½ï¿½ï¿½Òªï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		for(i=0;i<temp;i++) 
+			if(R[i]!='0') 
+				break;
+		if(i) 
+		  for(j=i;j<=temp;j++)
+		  	R[j-i]=R[j];
+		strcpy(r,R);
+		for(i=1;i<N;i++)
+			lnmp(r,R);
+		temp=strlen(r);
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if(!flag)
+		{
+		       for(j=0;j<temp;j++)
+		       putchar(r[j]);
+		}
+		//ÎªÐ¡ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½Ä©Î²ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½æ½«ï¿½ï¿½Ê¾ï¿½È½Ïµï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½
+		else
+		{       
+		       i=temp-xsdws;
+		       if(temp>xsdws)
+		       {
+		              i=temp-xsdws;
+		              for(j=0;j<i;j++)     
+		              		putchar(r[j]);
+		              for(k=temp-1;k>=0;k--)       
+		              		if(r[k]!='0') break;
+		              if(i<=k) putchar('.');
+		        	   for(j=i;j<k+1;j++)     
+		        	   	putchar(r[j]);
+		       }
+		       else
+		       {
+		              i=xsdws-temp;
+		              putchar('.');
+		              for(j=0;j<i;j++)     
+		              		putchar('0');
+		              for(k=temp-1;k>=0;k--)     
+		              		if(r[k]!='0') break;
+		              for(j=0;j<k+1;j++)      
+		              		putchar(r[j]);       
+		       }
+		}
+		putchar('\n');
+	}
+	return 0;
 }
