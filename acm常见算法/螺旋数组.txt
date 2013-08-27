@@ -1,0 +1,38 @@
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <string.h> 
+#include <conio.h> 
+
+#define h 5  // height 
+#define w 5  // width 
+
+void main ()  
+{ 
+    int a[h][w]={0}; 
+    int d=0, direct[4][2]= {{1,0},{0,1},{-1,0},{0,-1}}; 
+    int x=0, y=0, i; 
+    int x1,y1; 
+
+    for (i=1; i<= h * w; i++) 
+	{ 
+		a[y][x]= i; 
+		x1= x + direct[d][0]; 
+		y1= y + direct[d][1]; 
+		if (x1 <0|| x1 >=w || y1 <0 || y1 >=h ||a[y1][x1]!=0) 
+        { 
+            d = (d + 1) % 4; 
+            x1= x + direct[d][0]; 
+            y1= y + direct[d][1]; 
+        } 
+        x= x1; 
+        y= y1; 
+    } 
+    
+	for (y= 0; y<h; y++) 
+	{ 
+		for (x= 0; x<w; x++) 
+			printf("%4d", a[y][x]); 
+		printf("\n"); 
+	} 
+	getch(); 
+} 

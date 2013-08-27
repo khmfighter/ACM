@@ -1,0 +1,146 @@
+语法：result=insidepolygon(Point *polygon,int N,Point p);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+*polygon：
+ 
+ 
+多边形顶点数组
+ 
+ 
+
+ 
+ 
+N：
+ 
+ 
+多边形顶点个数
+ 
+ 
+
+ 
+ 
+p：
+ 
+ 
+被判断点
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+0：点在多边形内部；1：点在多边形外部
+ 
+ 
+
+ 
+ 
+注意：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+若p点在多边形顶点或者边上，返回值不确定，需另行判断
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+需要 math.h
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+#define MIN(x,y) (x < y ? x : y)
+
+#define MAX(x,y) (x > y ? x : y)
+typedefstruct {
+
+    double x,y;
+
+} Point;
+int insidepolygon(Point *polygon,int N,Point p)
+
+{
+
+    int counter = 0;
+
+    int i;
+
+    double xinters;
+
+    Point p1,p2;
+    p1 = polygon[0];
+
+    for (i=1;i<=N;i++) {
+
+        p2 = polygon[i % N];
+
+        if (p.y > MIN(p1.y,p2.y)) {
+
+            if (p.y <= MAX(p1.y,p2.y)) {
+
+                if (p.x <= MAX(p1.x,p2.x)) {
+
+                    if (p1.y != p2.y) {
+
+                        xinters = (p.y-p1.y)*(p2.x-p1.x)/(p2.y-p1.y)+p1.x;
+
+                        if (p1.x == p2.x || p.x <= xinters)
+
+                            counter++;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            p1 = p2;
+
+        }
+    if (counter % 2 == 0)
+
+        return(OUTSIDE);
+
+    else
+
+        return(INSIDE);
+
+} 

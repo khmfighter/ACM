@@ -1,0 +1,112 @@
+语法：result=mindistance(Point p1,Point p2,Point q);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+p1、p2：
+ 
+ 
+线段的两个端点
+ 
+ 
+
+ 
+ 
+q：
+ 
+ 
+判断点
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+点q到线段p1p2的距离
+ 
+ 
+
+ 
+ 
+注意：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+需要 math.h
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+#define MIN(x,y) (x < y ? x : y)
+
+#define MAX(x,y) (x > y ? x : y)
+typedefstruct {
+
+    double x,y;
+
+} Point;
+double mindistance(Point p1,Point p2,Point q)
+
+{
+
+    int flag=1;
+
+    double k;
+
+    Point s;
+
+    if (p1.x==p2.x) {s.x=p1.x;s.y=q.y;flag=0;}
+
+    if (p1.y==p2.y) {s.x=q.x;s.y=p1.y;flag=0;}
+
+    if (flag)
+
+        {
+
+        k=(p2.y-p1.y)/(p2.x-p1.x);
+
+        s.x=(k*k*p1.x+k*(q.y-p1.y)+q.x)/(k*k+1);
+
+        s.y=k*(s.x-p1.x)+p1.y;
+
+        }
+
+    if (MIN(p1.x,p2.x)<=s.x&&s.x<=MAX(p1.x,p2.x))
+
+        return sqrt((q.x-s.x)*(q.x-s.x)+(q.y-s.y)*(q.y-s.y));
+
+    else
+
+        return MIN(sqrt((q.x-p1.x)*(q.x-p1.x)+(q.y-p1.y)*(q.y-p1.y)),sqrt((q.x-p2.x)*(q.x-p2.x)+(q.y-p2.y)*(q.y-p2.y)));
+
+} 

@@ -1,0 +1,81 @@
+#include<stdio.h>
+
+int main()
+
+{
+
+    int n,i,j,k,max;
+
+    double u[20][20],temp1,temp2,rult;
+
+    while(scanf("%d",&n)!=EOF)
+
+    {
+
+        for(i=0;i<n;i++)
+
+            for(j=0;j<n;j++)
+
+                scanf("%lf",&u[j]);
+
+        // 矩阵变换上三角
+
+        for(i=0;i<n-1;i++)
+
+        {
+
+            max=i;
+
+            for(j=i+1;j<n;j++)
+
+            {
+
+                temp1=u<0 ? -u : u;
+
+                temp2=(u[j]<0 ?-u[j]:u[j]);
+
+                if(temp2>temp1)max=j;
+
+            }
+
+            if(max!=i)
+
+                for(j=i;j<n;j++)
+
+                {
+
+                   temp1=u[max][j];
+
+                   u[max][j]=u[j];
+
+                   u[j]=temp1;
+
+                }
+
+            for(j=i+1;j<n;j++)
+
+            {
+
+                temp1=u[j]/u;
+
+                for(k=i;k<=n;k++)
+
+                    u[j][k]=u[j][k]-u[k]*temp1;
+
+            }
+
+        }
+
+        //依次求解
+
+        for(rult=1,i=0;i<n;i++)
+
+           rult*=u;
+
+        printf("%.4lf",rult);
+
+    }
+
+    return 0;
+
+}

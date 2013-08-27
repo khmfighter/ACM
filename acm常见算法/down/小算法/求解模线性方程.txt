@@ -1,0 +1,91 @@
+语法：result＝modular_equation(int a,int b,int n);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+a、b、n：
+ 
+ 
+ax=b (mod n) 的对应参数
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+方程的解
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+int ext_euclid(int a,int b,int &x,int &y)  //求gcd(a,b)=ax+by
+
+{
+
+    int t,d;
+
+    if (b==0) {x=1;y=0;return a;}
+
+    d=ext_euclid(b,a %b,x,y);
+
+    t=x;
+
+    x=y;
+
+    y=t-a/b*y;
+
+    return d;
+
+}
+
+
+
+void modular_equation(int a,int b,int n)
+
+{
+
+    int e,i,d;
+
+    int x,y;
+
+    d=ext_euclid(a,n,x,y);
+
+    if (b%d>0)
+
+       printf("No answer!\n");
+
+    else
+
+        {
+
+       e=(x*(b/d))%n;
+
+        for (i=0;i<d;i++)
+
+            printf("The %dth answer is : %ld\n",i+1,(e+i*(n/d))%n); 
+
+        }
+
+} 

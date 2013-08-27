@@ -1,0 +1,153 @@
+
+/********************************************
+   实现A+B的高精度算法,采用的是链表结构
+********************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <conio.h>
+#define MAX 100
+
+typedef struct linknode 
+{
+	int data;
+	struct linknode *pre;
+	struct linknode *next;
+}plinknode;
+
+plinknode *head[3]={NULL},*tail[3]={NULL};
+
+void initial()
+{
+	int i;
+	for(i=0;i<3;i++)
+	{
+		head[i]=NULL;
+		tail[i]=NULL;
+	}
+}
+
+void insertAdata(char ch,int index)
+{
+	plinknode *p;
+	if(ch<'0' || ch>'9')
+	{
+		printf("输入的数据不符合规范!检查后重新输入...\n");
+		getch();
+		exit(0);
+	}
+	
+	p=(plinknode *)malloc(sizeof(plinknode));
+	if(p==NULL)
+	{
+		printf("无法创建节点!按任意键退出程序...\n");
+		getch();
+		exit(0);
+	}
+	p->data=ch-'0';
+	if(tail[index]==NULL)
+	{
+		head[index]=p;
+		head[index]->pre=NULL;
+		tail[index]=p;
+		tail[index]->next=NULL;
+	}
+	else
+	{
+		p->pre=tail[index];
+		tail[index]->next=p;
+		tail[index]=p;
+	}
+}
+
+void inputC(int dat)
+{
+	plinknode *c;
+	c=(plinknode *)malloc(sizeof(plinknode));
+	if(c==NULL)
+	{
+		printf("无法创建节点!按任意键推出程序...\n");
+		getch();
+		exit(0);
+	}
+	c->data=dat;
+	if(tail[2]==NULL)	
+	{
+		head[2]=c;
+		head[2]->pre=NULL;
+		tail[2]=c;
+		tail[2]->next=NULL;
+	}
+	else
+	{
+		c->pre=tail[2];
+		tail[2]->next=c;
+		tail[2]=c;
+	}
+}
+
+void inputAandB()
+{
+	char ch;
+	int i;
+	for(i=0;i<2;i++)
+	{
+		printf("输入%c:",65+i);
+		while((ch=getchar())!='\n')
+			insertAdata(ch,i);
+	}
+}
+
+void addAandBtoC()
+{
+	struct linknode *a=NULL,*b=NULL;
+	int h=0,data=0;
+	a=tail[0];
+	b=tail[1];
+	while(a!=NULL && b!=NULL)
+	{
+		data=(a->data+b->data)%10+h;
+		h=(a->data+b->data)/10;
+		inputC(data);
+		a=a->pre;
+		b=b->pre;
+	}
+	while(a!=NULL)
+	{
+		inputC(a->data);
+		a=a->pre;
+	}
+	while(b!=NULL)
+	{
+		inputC(b->data);
+		b=b->pre; 
+	}
+
+}
+
+void outputC()
+{
+	plinknode *p;
+	p=tail[2];
+	printf("结果C:");
+	while(p!=NULL)
+	{
+		printf("%d",p->data);
+		p=p->pre;
+	}
+	getch();
+}
+
+
+void main()
+{
+	while(1)
+	{
+		inputAandB();
+		addAandBtoC();
+		outputC();
+		system("cls");
+		initial();
+	}
+}

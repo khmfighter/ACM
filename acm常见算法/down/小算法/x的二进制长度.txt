@@ -1,0 +1,59 @@
+语法：result=BitLength(int x);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+x：
+ 
+ 
+测长的x
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+x的二进制长度
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+int BitLength(int x)
+
+{
+
+    int d = 0;
+
+    while (x > 0) {
+
+        x >>= 1;
+
+        d++;
+
+    }
+
+    return d;
+
+} 

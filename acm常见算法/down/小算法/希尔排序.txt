@@ -1,0 +1,120 @@
+语法：shellsort(int a[],int n);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+n：
+ 
+ 
+数组元素个数
+ 
+ 
+
+ 
+ 
+a[]：
+ 
+ 
+待排序数组
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+null
+ 
+ 
+
+ 
+ 
+注意：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+输出升序序列
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+void shellsort(int a[],int n)
+
+{
+
+    int i,j,g;
+
+    int temp,k;
+
+    g=n/2;
+
+    while(g!=0)
+
+        {
+
+        for(i=g+1;i<=n;i++)
+
+            {
+
+            temp=a;
+
+            j=i-g;
+
+            while(j>0)
+
+                {
+
+                k=j+g;
+
+                if(a[j]<=a[k])
+
+                    j=0;
+
+                else
+
+                    {
+
+                    temp=a[j];a[j]=a[k];a[k]=temp;
+
+                    }
+
+                j=j-g;
+
+                }
+
+            }
+
+        g=g/2;
+
+        }
+
+} 

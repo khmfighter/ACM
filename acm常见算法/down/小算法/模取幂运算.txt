@@ -1,0 +1,81 @@
+语法：result=Modular_Expoent(int a,int b,int n);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+a、b、n：
+ 
+ 
+a^b mod n 的对应参数
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+a^b mod n 的值
+ 
+ 
+
+ 
+ 
+注意：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+需要BitLength和BitAt
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+int Modular_Expoent(int a,int b,int n)
+
+{
+
+    int i, y=1;
+
+    for (i = BitLength(b); i > 0; i--)
+
+        { 
+
+        y = (y*y)%n;
+
+        if (BitAt(b,i) > 0) 
+
+        y = (y*a)%n;
+
+        }
+
+    return y;
+
+} 

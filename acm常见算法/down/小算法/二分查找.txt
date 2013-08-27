@@ -1,0 +1,92 @@
+result=search_bin(int *t,int k);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+t[]：
+ 
+ 
+待查找数组
+ 
+ 
+
+ 
+ 
+k：
+ 
+ 
+查找关键字
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+如果k在t[]中存在，输出i：t=k，否则输出－1
+ 
+ 
+
+ 
+ 
+注意：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+要求查找数组是有序升序序列
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+int search_bin(int *t,int k)
+
+{
+
+    int low=1,high=10,mid;
+
+    while (low<=high)
+
+        {
+
+        mid=(low+high)/2;
+
+        if (k==t[mid]) return mid;
+
+        elseif (k<t[mid]) high=mid-1;
+
+        else low=mid+1;
+
+        }
+
+    return -1;
+
+} 

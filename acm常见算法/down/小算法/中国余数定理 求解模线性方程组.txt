@@ -1,0 +1,113 @@
+语法：result=Modular_Expoent(int a,int b,int n);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+B[]、W[]：
+ 
+ 
+a=B[] (mod W[]) 的对应参数
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+a 的值
+ 
+ 
+
+ 
+ 
+注意：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+其中W[],B[]已知，W>0且W与W[j]互质, 求a
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+int ext_euclid(int a,int b,int &x,int &y)  //求gcd(a,b)=ax+by
+
+{
+
+    int t,d;
+
+    if (b==0) {x=1;y=0;return a;}
+
+    d=ext_euclid(b,a %b,x,y);
+
+    t=x;
+
+    x=y;
+
+    y=t-a/b*y;
+
+    return d;
+
+}
+
+
+
+
+
+int China(int B[],int W[],int k)
+
+{
+
+   int i;
+
+    int d,x,y,a=0,m,n=1;
+
+    for (i=0;i<k;i++)
+
+        n*=W;
+
+    for (i=0;i<k;i++)
+
+       {
+
+       m=n/W;
+
+        d=ext_euclid(W,m,x,y);
+
+        a=(a+y*m*B)%n;
+
+        }
+
+    if (a>0) return a;
+
+    elsereturn(a+n);
+
+} 

@@ -1,0 +1,88 @@
+语法：result=area3(float x1,float y1,float x2,float y2,float x3,float y3);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+x1～3：
+ 
+ 
+三角形3个顶点x坐标
+ 
+ 
+
+ 
+ 
+y1～3：
+ 
+ 
+三角形3个顶点y坐标
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+三角形面积
+ 
+ 
+
+ 
+ 
+注意：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+需要 math.h
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+float area3(float x1,float y1,float x2,float y2,float x3,float y3)
+
+{
+
+    float a,b,c,p,s;
+
+    a=sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+
+    b=sqrt((x1-x3)*(x1-x3)+(y1-y3)*(y1-y3));
+
+    c=sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2));
+
+    p=(a+b+c)/2;
+
+    s=sqrt(p*(p-a)*(p-b)*(p-c));
+
+    return s;
+
+} 

@@ -1,0 +1,129 @@
+语法：quicksort(int l,int r,int b[]);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+l：
+ 
+ 
+排序上界，开始时l=0
+ 
+ 
+
+ 
+ 
+r：
+ 
+ 
+排序下界，开始时r=数组元素个数
+ 
+ 
+
+ 
+ 
+b[]：
+ 
+ 
+被排序的元素
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+null
+ 
+ 
+
+ 
+ 
+注意：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+输出升序序列
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+void quicksort(int l,int r,int b[])
+
+{
+
+    int i,j,x;
+
+    if(l>=r) return;
+
+    i=l;
+
+    j=r;
+
+    x=b;
+
+    while(i!=j)
+
+        {
+
+        while(b[j]>x&&j>i) j--;
+
+        if(i<j)
+
+            {
+
+            b=b[j];
+
+            i++;
+
+            }
+
+        while(b<x&&j>i)i++;
+
+            if(i<j)
+
+                {
+
+                b[j]=b;
+
+                j--;
+
+                }
+
+        }
+
+    b=x;
+
+    quicksort(l,j-1,b);
+
+    quicksort(i+1,r,b);
+
+} 

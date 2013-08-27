@@ -1,0 +1,153 @@
+语法：Graham_scan(Point PointSet[],Point ch[],int n,int &len);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+PointSet[]：
+ 
+ 
+输入的点集
+ 
+ 
+
+ 
+ 
+ch[]：
+ 
+ 
+输出的凸包上的点集，按照逆时针方向排列
+ 
+ 
+
+ 
+ 
+n：
+ 
+ 
+PointSet中的点的数目
+ 
+ 
+
+ 
+ 
+len：
+ 
+ 
+输出的凸包上的点的个数
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+null
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+struct Point{
+
+    float x,y;
+
+}; 
+float multiply(Point p1,Point p2,Point p0)
+
+{
+
+    return((p1.x-p0.x)*(p2.y-p0.y)-(p2.x-p0.x)*(p1.y-p0.y)); 
+
+}
+float distance(Point p1,Point p2)
+
+{
+
+    return(sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y))); 
+
+}
+void Graham_scan(Point PointSet[],Point ch[],int n,int &len)
+
+{
+
+    int i,j,k=0,top=2;
+
+    Point tmp;
+
+
+
+   for(i=1;i<n;i++)
+
+    if ((PointSet.y<PointSet[k].y)||((PointSet.y==PointSet[k].y)&&(PointSet.x<PointSet[k].x)))
+
+    k=i;
+
+    tmp=PointSet[0];
+
+    PointSet[0]=PointSet[k];
+
+    PointSet[k]=tmp; 
+
+    for (i=1;i<n-1;i++)
+
+        {
+
+        k=i;
+
+        for (j=i+1;j<n;j++)
+
+            if ( (multiply(PointSet[j],PointSet[k],PointSet[0])>0) ||
+
+                     ((multiply(PointSet[j],PointSet[k],PointSet[0])==0)
+
+                         &&(distance(PointSet[0],PointSet[j])<distance(PointSet[0],PointSet[k])))   )
+
+                k=j;
+
+        tmp=PointSet;
+
+        PointSet=PointSet[k];
+
+        PointSet[k]=tmp;
+
+        }
+
+    ch[0]=PointSet[0];
+
+    ch[1]=PointSet[1];
+
+    ch[2]=PointSet[2]; 
+
+    for (i=3;i<n;i++)
+
+        {
+
+        while (multiply(PointSet,ch[top],ch[top-1])>=0) top--;
+
+        ch[++top]=PointSet;
+
+        }
+
+    len=top+1;
+
+} 

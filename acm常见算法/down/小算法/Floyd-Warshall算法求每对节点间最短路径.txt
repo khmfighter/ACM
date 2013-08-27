@@ -1,0 +1,98 @@
+语法：Floyd_Washall(Graph G,int n,Graph D,Graph P);
+ 
+ 
+
+ 
+ 
+参数：
+ 
+ 
+
+ 
+ 
+G：
+ 
+ 
+图，用邻接矩阵表示
+ 
+ 
+
+ 
+ 
+n：
+ 
+ 
+图的顶点个数
+ 
+ 
+
+ 
+ 
+D：
+ 
+ 
+D[i,j]表示从i到j的最短距离
+ 
+ 
+
+ 
+ 
+P：
+ 
+ 
+P[i,j]表示从i到j的最短路径上j 的父节点 
+ 
+ 
+
+ 
+ 
+返回值：
+ 
+ 
+null
+ 
+ 
+
+ 
+ 
+源程序：
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+void Floyd_Washall(Graph G,int n,Graph D,Graph P)
+
+{
+
+    int i,j,k;
+
+    for (i=0;i<n;i++)
+
+        for (j=0;j<n;j++)
+
+            { D[j]=G[j];
+
+                P[j]=i; }
+
+    for (i=0;i<n;i++) { D=0;P=0; }
+
+    for (k=0;k<n;k++)
+
+        for (i=0;i<n;i++)
+
+            for (j=0;j<n;j++)
+
+                if (D[j]>D[k]+D[k][j])
+
+                    { D[j]=D[k]+D[k][j];
+
+                        P[j]=P[k][j]; }
+
+} 
